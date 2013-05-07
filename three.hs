@@ -3,12 +3,8 @@
 
 -- factors currentFactor
 -- [2,3] ++ [6*n-1,6*n+1]
-
--- let
---   testList = [2,3,5,..]
---   factors = []
---   in
---  print factor n factors testList
+-- Look into trial division with factors above
+-- Look into sqrt n termination
 
 _factor n factors testList =
   let
