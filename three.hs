@@ -1,16 +1,24 @@
 
-primes n = primes2 [] [2,3..n]
+-- Largest prime factor of 600851475143
 
--- a - primes found so far
--- p - still sieving
-primes2 a [] = a
-primes2 a p = 
-  primes2 a' p'
-  where
-    next = head p
-    a' = next:a
-    p' = filter (\n -> n `mod` next /= 0) p
+-- factors currentFactor 
+-- [2,3] ++ [6*n-1,6*n+1]
 
-factor n = filter (\x -> n `mod` x == 0) (primes (n `div` 2))
+-- let 
+--   testList = [2,3,5,..]
+--   factors = []
+--   in
+--  print factor n factors testList
 
-main = print (take 1 (factor 600851475143))
+_factor n factors testList = 
+  let
+    testNum = head testList
+  in
+   case n `divMod` testNum of
+     (1,0) -> testNum:factors
+     (n', 0) -> _factor n' (testNum:factors) testList
+     _ -> _factor n factors (tail testList)
+          
+factor n =
+  _factor n [] (2:[3,5..])
+  
